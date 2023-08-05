@@ -9,6 +9,7 @@ import org.eclipse.microprofile.health.HealthCheckResponseBuilder;
 import org.eclipse.microprofile.health.Readiness;
 
 @Readiness
+// It will be returned under `...q/health/ready`
 @ApplicationScoped
 public class DatabaseConnectionHealthCheck implements HealthCheck {
 
@@ -24,8 +25,10 @@ public class DatabaseConnectionHealthCheck implements HealthCheck {
             simulateDatabaseConnectionVerification();
             responseBuilder.up();
         } catch (IllegalStateException e) {
+            // Catch just this error, since it's the thrown manually by us
             // cannot access the database
             responseBuilder.down()
+                    // Possible to supply arbitrary data via key-value pairs. Pretty useful in error scenarios
                     .withData("error", e.getMessage()); // pass the exception message
         }
 

@@ -7,7 +7,9 @@ import org.eclipse.microprofile.health.HealthCheckResponse;
 import org.eclipse.microprofile.health.Liveness;
 
 @Liveness
+// It will be returned under `...q/health/live`
 @ApplicationScoped
+// Recommendation to annotate with this or @Singleton
 public class SimpleHealthCheck implements HealthCheck {
 
     @Override
