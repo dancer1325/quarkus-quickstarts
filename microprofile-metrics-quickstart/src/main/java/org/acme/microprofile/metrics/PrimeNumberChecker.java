@@ -19,6 +19,7 @@ public class PrimeNumberChecker {
     @Produces("text/plain")
     @Counted(name = "performedChecks", description = "How many primality checks have been performed.")
     @Timed(name = "checksTimer", description = "A measure how long it takes to perform the primality test.", unit = MetricUnits.MILLISECONDS)
+    // Compound metric about how much time the primality tests take
     public String checkIfPrime(long number) {
         if (number < 1) {
             return "Only natural numbers can be prime numbers.";
