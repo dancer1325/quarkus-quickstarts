@@ -5,3 +5,16 @@ the final solution as well as the incremental versions leading up to the final s
 and some additional features beyond that.
 
 Quarkus guide: https://quarkus.io/guides/security-jwt
+
+## Sample requests
+* `curl localhost:8080/secured/permit-all`
+* `curl localhost:8080/secured/roles-allowed -v`
+- 401
+* `curl -H "Authorization: Bearer GeneratedJWT" localhost:8080/secured/roles-allowed -v`
+- Previously you need to run `mvn exec:java -Dexec.mainClass=org.acme.security.jwt.GenerateToken -Dexec.classpathScope=test -Dsmallrye.jwt.sign.key.location=privateKey.pem`
+* `curl -H "Authorization: Bearer GeneratedJWT" localhost:8080/secured/roles-allowed-admin -v`
+- Previously you need to run `mvn exec:java -Dexec.mainClass=org.acme.security.jwt.GenerateToken -Dexec.classpathScope=test -Dsmallrye.jwt.sign.key.location=privateKey.pem`
+
+## JWT generation
+* https://www.keycloak.org/[Keycloack]
+* https://quarkus.io/guides/security-jwt-build[SmmalRyeJWT]

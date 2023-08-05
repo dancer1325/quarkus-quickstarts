@@ -18,6 +18,7 @@ import org.eclipse.microprofile.jwt.Claims;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
 @Path("/secured")
+// @RequestScoped   required because we have injected birthday claim
 @RequestScoped
 public class TokenSecuredResource {
 
