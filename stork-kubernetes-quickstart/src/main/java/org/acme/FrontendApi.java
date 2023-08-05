@@ -8,7 +8,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * A frontend API using our REST Client (which uses Stork to locate and select the service instance on each call).
+ * A frontend API using our REST Client (which uses Stork to locate
+ * and select the service instance on each call).
  */
 @Path("/api")
 public class FrontendApi {
