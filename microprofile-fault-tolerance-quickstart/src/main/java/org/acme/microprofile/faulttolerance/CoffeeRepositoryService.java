@@ -52,7 +52,10 @@ public class CoffeeRepositoryService {
                 .collect(Collectors.toList());
     }
 
+    // CircuitBreaker.failureRatio is by default 0.5
+    // CircuitBreaker.delay is by default 5 seconds
     @CircuitBreaker(requestVolumeThreshold = 4)
+    // --> Circuit breaker will open when 2 (failureRatio = 0.5) of the last 4 (requestVolumeThreshold = 4) invocations fail
     public Integer getAvailability(Coffee coffee) {
         maybeFail();
         return availability.get(coffee.id);

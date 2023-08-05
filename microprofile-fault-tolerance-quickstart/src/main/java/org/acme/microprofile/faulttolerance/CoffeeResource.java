@@ -111,7 +111,9 @@ public class CoffeeResource {
     @GET
     @Path("/{id}/recommendations")
     @Timeout(250)
+    // Time waiting for a response from the client to this request
     @Fallback(fallbackMethod = "fallbackRecommendations")
+    // Fallback in case of failure
     public List<Coffee> recommendations(int id) {
         long started = System.currentTimeMillis();
         final long invocationNumber = counter.getAndIncrement();
@@ -121,6 +123,7 @@ public class CoffeeResource {
             LOGGER.infof("CoffeeResource#recommendations() invocation #%d returning successfully", invocationNumber);
             return coffeeRepository.getRecommendations(id);
         } catch (InterruptedException e) {
+            // Just to catch this error, the only one thrown by randomDelay()
             LOGGER.errorf("CoffeeResource#recommendations() invocation #%d timed out after %d ms",
                     invocationNumber, System.currentTimeMillis() - started);
             return null;
@@ -140,10 +143,12 @@ public class CoffeeResource {
         // introduce some artificial failures
         if (new Random().nextFloat() < failRatio) {
             LOGGER.error(failureLogMessage);
+            // Throw the exception configured to run retries
             throw new RuntimeException("Resource failure.");
         }
     }
 
+    // If the delay takes more time than the maximum time to wait for -> throw InterruptedException
     private void randomDelay() throws InterruptedException {
         // introduce some artificial delay
         Thread.sleep(new Random().nextInt(500));
