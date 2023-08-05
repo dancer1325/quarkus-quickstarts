@@ -5,6 +5,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
+// TODO: What's it used for?
 @Path("/")
 public interface ResourceClient {
     @GET
