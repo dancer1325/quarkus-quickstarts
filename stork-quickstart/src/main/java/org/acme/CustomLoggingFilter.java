@@ -1,12 +1,11 @@
 package org.acme;
 
-import io.vertx.core.http.HttpServerRequest;
+import jakarta.ws.rs.ext.Provider;
 import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.client.spi.ResteasyReactiveClientRequestContext;
 import org.jboss.resteasy.reactive.client.spi.ResteasyReactiveClientRequestFilter;
 
-import jakarta.ws.rs.ext.Provider;
-
+// Filter to add logging capability to our service -> 1) @Provider and 2) Implements from some filter
 @Provider
 public class CustomLoggingFilter implements ResteasyReactiveClientRequestFilter {
 
@@ -14,6 +13,6 @@ public class CustomLoggingFilter implements ResteasyReactiveClientRequestFilter 
 
     @Override
     public void filter(ResteasyReactiveClientRequestContext requestContext) {
-        LOG.infof("Resolved address by Stork: %s",requestContext.getUri().toString());
+        LOG.infof("Resolved address by Stork: %s", requestContext.getUri().toString());
     }
 }

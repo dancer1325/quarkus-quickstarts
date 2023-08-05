@@ -27,6 +27,7 @@ public class Registration {
     public void init(@Observes StartupEvent ev, Vertx vertx) {
         ConsulClient client = ConsulClient.create(vertx, new ConsulClientOptions().setHost(host).setPort(port));
 
+        // Same name to register them as different instances of the same service. Different id is necessary
         client.registerServiceAndAwait(
                 new ServiceOptions().setPort(blue).setAddress("localhost").setName("my-service").setId("blue"));
         client.registerServiceAndAwait(
