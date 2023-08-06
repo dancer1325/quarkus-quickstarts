@@ -43,6 +43,7 @@ spec:
     app.kubernetes.io/version: "1.0"
     type: color-service
   type: ClusterIP
+# Stork discovers this Service
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -59,6 +60,7 @@ metadata:
 spec:
   rules:
     - host: color-service.127.0.0.1.nip.io
+# color-service is accessible outside the cluster at this host
       http:
         paths:
           - backend:
@@ -68,6 +70,8 @@ spec:
                   name: http
             path: /
             pathType: Prefix
+# It's not needed for Stork, although it helps to check the architecture is
+#  in place.
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,6 +109,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           image: quay.io/quarkus/blue-service:1.0
+#         Image of the same service as the stork-quickstart guide
           imagePullPolicy: Always
           name: blue-service
           ports:
@@ -148,6 +153,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           image: quay.io/quarkus/red-service:1.0
+#         Image of the same service as the stork-quickstart guide
           imagePullPolicy: Always
           name: red-service
           ports:
