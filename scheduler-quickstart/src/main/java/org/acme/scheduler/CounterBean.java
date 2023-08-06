@@ -27,6 +27,7 @@ public class CounterBean {
         System.out.println(execution.getScheduledFireTime());
     }
 
+    // Value pass directly via environment variables without declaring a class' variable
     @Scheduled(cron = "{cron.expr}")
     void cronJobWithExpressionInConfig() {
         counter.incrementAndGet();
