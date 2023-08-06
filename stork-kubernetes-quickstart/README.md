@@ -10,7 +10,7 @@ Quarkus guide: https://quarkus.io/guides/stork-kubernetes
     * Customizable client load-balancing strategies
 * Check the architecture of the application [here](https://quarkus.io/guides/stork-kubernetes#architecture)
 * `quarkus-kubernetes`
-  * each time a new build is done -> generate a Kubernetes manifest
+  * each time a new package is done -> generate a Kubernetes manifest
 * `kubernetes-setup.yml` 
   * Kubernetes file which contains two manifests corresponding to two simple applications. 
   They are the instances of the service we will discover using Stork Kubernetes Service discovery.
