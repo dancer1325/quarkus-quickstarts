@@ -15,11 +15,17 @@ public class MailResource {
 
     @Inject
     Mailer mailer;
+    // Managed by Quarkus
 
     @GET
     @Blocking
+    // We need to block, since this endpoint is via imperative mailer + RESTEasy Reactive
     public void sendEmail() {
-        mailer.send(Mail.withText("your-destination-email@quarkus.io", "Ahoy from Quarkus", "A simple email sent from a Quarkus application."));
+        // Define the destination (to), subject or text to send
+        mailer.send(Mail
+                .withText("your-destination-email@quarkus.io",
+                        "Ahoy from Quarkus",
+                        "A simple email sent from a Quarkus application."));
     }
 
     @Inject
@@ -27,9 +33,11 @@ public class MailResource {
 
     @GET
     @Path("/reactive")
+    // Since it's reactive -> Unneeded to block it
     public Uni<Void> sendEmailUsingReactiveMailer() {
+        // Returns Uni, since it's reactive. Once the mail is sent -> it's completed
         return reactiveMailer.send(                         // <4>
-                Mail.withText("clement.escoffier@redhat.com",
+                Mail.withText("alfrejose92@gmail.com",
                         "Ahoy from Quarkus",
                         "A simple email sent from a Quarkus application using the reactive API."
                 )

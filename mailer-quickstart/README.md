@@ -110,5 +110,11 @@ Before running the other demos, don't forget to edit the code to use your email 
 * Template: [template](src/main/resources/templates/TypeSafeMailResource/hello.html)
 * Command: `curl -v http://localhost:8080/type-safe`
 
-
-
+## Notes
+* `quarkus-mailer`
+* [Architecture](https://quarkus.io/guides/mailer#architecture)
+* Sample requests
+  * `curl localhost:8080/mail`
+    * If you run the Quarkus application in dev mode -> It simulates the email sent and print it in the log
+  * `curl http://localhost:8080/mail/reactive`
+    * If you run the Quarkus application in dev mode -> It simulates the email sent and print it in the log
