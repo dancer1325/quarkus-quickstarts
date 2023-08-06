@@ -15,6 +15,7 @@ public class MailResource {
 
     @Inject
     Mailer mailer;
+    // Sync mailer client
     // Managed by Quarkus
 
     @GET
@@ -30,6 +31,7 @@ public class MailResource {
 
     @Inject
     ReactiveMailer reactiveMailer;
+    // Async mailer client
 
     @GET
     @Path("/reactive")
@@ -37,7 +39,7 @@ public class MailResource {
     public Uni<Void> sendEmailUsingReactiveMailer() {
         // Returns Uni, since it's reactive. Once the mail is sent -> it's completed
         return reactiveMailer.send(                         // <4>
-                Mail.withText("alfrejose92@gmail.com",
+                Mail.withText("your-destination-email@quarkus.io",
                         "Ahoy from Quarkus",
                         "A simple email sent from a Quarkus application using the reactive API."
                 )
