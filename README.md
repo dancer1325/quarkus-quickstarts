@@ -1,29 +1,19 @@
 # QuickStarts for Getting Started Guides
 
-This repository contains a set of Quickstarts for the Quarkus framework. Each of them have a Getting started guide.
-
 ## Requirements
 
-To compile and run these demos you will need:
-
-- JDK 8 or 11+
-- GraalVM
-
-See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image) for help setting up your environment.
+* JDK 8 or 11+
+* GraalVM
+* [how to set up your environment](https://quarkus.io/guides/building-native-image)
 
 ## Use alternative platforms
 
-These quickstart by default currently uses the Quarkus core BOM.
-
-If you want to use an alternative BOM when building the quickstart you can override the `quarkus.platform.*` properties. The following example shows how to set `quarkus.platform.artifact-id` to use the universe-bom.
-
-```
-mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
-```
-
-## Contributions
-
-See [CONTRIBUTING](CONTRIBUTING.md) for how to build these examples.
+* CURRENTLY, Quarkus core BOM
+* override `quarkus.platform.*` properties
+  * _Example:_ `quarkus.platform.artifact-id=quarkus-universe-bom`
+    ```
+    mvn -Dquarkus.platform.artifact-id=quarkus-universe-bom clean install
+    ```
 
 ## Quick Start list
 
