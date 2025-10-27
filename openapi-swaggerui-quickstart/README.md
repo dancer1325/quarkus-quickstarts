@@ -21,7 +21,7 @@ Quarkus guide: https://quarkus.io/guides/openapi-swaggerui
   * Implementation of [microprofile-open-api](https://github.com/eclipse/microprofile-open-api/) for [OpenAPI-v3](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.0.md)
 * Load OpenAPI schema from static fields
   * Create "META-INF/openapi.yaml", following [OpenAPI specification](https://swagger.io/docs/specification/about/)
-    * :eye: Live reloaded is supported :eye:
+    * 👀 Live reloaded is supported 👀
     * Alternative paths
       * "META-INF/openapi.yml"
       * "META-INF/openapi.json"
@@ -30,6 +30,9 @@ Quarkus guide: https://quarkus.io/guides/openapi-swaggerui
       * "WEB-INF/classes/META-INF/openapi.json"
   * `curl "localhost:8080/q/openapi?format=json"`
     * :warning: OpenAPI document from static file + model generated from application endpoints code :warning:
+  * | browser,
+    * http://localhost:8080/q/openapi
 * [Swagger UI](https://swagger.io/tools/swagger-ui/)
   * Included in `quarkus-smallrye-openapi`
-  * Open the browser in "http://localhost:8080/q/swagger-ui/"
+  * | browser,
+    * "http://localhost:8080/q/swagger-ui/"
