@@ -7,7 +7,7 @@ import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-// Microprofile-open-api annotations
+// Microprofile-open-api annotations | Jakarta REST `Application` class
 @OpenAPIDefinition(
         tags = {
                 @Tag(name="widget", description="Widget operations."),

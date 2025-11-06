@@ -36,3 +36,8 @@ Quarkus guide: https://quarkus.io/guides/openapi-swaggerui
   * Included in `quarkus-smallrye-openapi`
   * | browser,
     * "http://localhost:8080/q/swagger-ui/"
+## use appropriate OpenAPI annotations | 
+### Jakarta REST `Application` class
+* [ExampleApiApplication](src/main/java/org/acme/openapi/swaggerui/ExampleApiApplication.java)
+### application.properties
+* [here](src/main/resources/application.properties)
