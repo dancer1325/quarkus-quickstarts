@@ -1,53 +1,48 @@
 # Getting started with Quarkus
 
-This is a minimal CRUD service exposing a couple of endpoints over REST.
+* goal
+  * CRUD service / expose endpointS -- over -- REST
 
-Under the hood, this demo uses:
-
-- RESTEasy to expose the REST endpoints
-- REST-assured and JUnit 5 for endpoint testing
+* approach
+  * RESTEasy
+    * expose the REST endpoints
+  * REST-assured & JUnit 5
+    * -- for -- endpoint testing
 
 ## Requirements
-
-To compile and run this demo you will need:
 
 - JDK 11+
 - GraalVM
 
 ### Configuring GraalVM and JDK 11+
 
-Make sure that both the `GRAALVM_HOME` and `JAVA_HOME` environment variables have
-been set, and that a JDK 11+ `java` command is on the path.
+* [how to build a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
 
-See the [Building a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
-for help setting up your environment.
-
-## Building the application
-
-Launch the Maven build on the checked out sources of this demo:
+## how to build the application?
 
 > ./mvnw package
 
 ### Live coding with Quarkus
 
-The Maven Quarkus plugin provides a development mode that supports
-live coding. To try this out:
-
 > ./mvnw quarkus:dev
 
-This command will leave Quarkus running in the foreground listening on port 8080.
-
-1. Visit the default endpoint: [http://127.0.0.1:8080](http://127.0.0.1:8080).
-    - Make a simple change to [src/main/resources/META-INF/resources/index.html](src/main/resources/META-INF/resources/index.html) file.
-    - Refresh the browser to see the updated page.
-2. Visit the `/hello` endpoint: [http://127.0.0.1:8080/hello](http://127.0.0.1:8080/hello)
-    - Update the response in [src/main/java/org/acme/quickstart/GreetingResource.java](src/main/java/org/acme/quickstart/GreetingResource.java). Replace `hello` with `hello there` in the `hello()` method.
-    - Refresh the browser. You should now see `hello there`.
-    - Undo the change, so the method returns `hello` again.
-    - Refresh the browser. You should now see `hello`.
+* allows
+  * 👀code & running👀
+    * test1
+      * http://127.0.0.1:8080
+      * changes [index.html](src/main/resources/META-INF/resources/index.html)
+      * refresh the browser
+        * check the change reflected
+    * test2
+      * http://127.0.0.1:8080/hello
+      * [change endpoint's response](src/main/java/org/acme/getting/started/GreetingResource.java)
+      * refresh the browser
+        * check the change reflected
+* provided -- by -- Maven Quarkus plugin
 
 ### Run Quarkus in JVM mode
 
+* TODO: 
 When you're done iterating in developer mode, you can run the application as a
 conventional jar file.
 
