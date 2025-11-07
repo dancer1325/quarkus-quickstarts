@@ -1,0 +1,6 @@
+### GreetingResource
+GET http://localhost:8080/greeting
+
+### ServerResource
+GET http://localhost:8080/server/info
+Content-Type: */*
