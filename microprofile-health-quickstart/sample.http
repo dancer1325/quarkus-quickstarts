@@ -1,0 +1,11 @@
+###
+GET localhost:8080/q/health
+
+###
+GET localhost:8080/q/health/live
+
+###
+GET localhost:8080/q/health/ready
+
+###
+GET localhost:8080/q/health/started
