@@ -67,8 +67,6 @@
     * `ls -lh target/getting-started-1.0.0-SNAPSHOT-runner`
       * 's size << [jar + JVM](#-jvm-mode)
   * `./target/getting-started-1.0.0-SNAPSHOT-runner`
-  
-
 
 ## Quarkus REST resources vs Jakarta REST resources
 ### ❌NO need to create an `Application` class❌
@@ -84,4 +82,7 @@
 #### if you want to configure it -> use `*Scoped` annotations
 * [GreetingService.java](src/main/java/org/acme/getting/started/GreetingService.java)
 
-
+## Using injection
+### ArC
+#### inherit -- from -- `quarkus-rest`
+* [pom.xml](pom.xml)
