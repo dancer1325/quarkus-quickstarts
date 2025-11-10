@@ -68,3 +68,20 @@
       * 's size << [jar + JVM](#-jvm-mode)
   * `./target/getting-started-1.0.0-SNAPSHOT-runner`
   
+
+
+## Quarkus REST resources vs Jakarta REST resources
+### ❌NO need to create an `Application` class❌
+* there is NO `Application` class | [src](src/main/java/org/acme)
+### 1! resource instance
+* [run it](#how-to-run)
+* hit MULTIPLE [requests](sample.http)
+* | application's running logs
+  * ONLY find 1! GreetingResource instance created: #1
+#### != 1 resource instance / request
+* [up](#1-resource-instance)
+  * ALTHOUGH you hit MULTIPLE requests -> ONLY 1! time logged
+#### if you want to configure it -> use `*Scoped` annotations
+* [GreetingService.java](src/main/java/org/acme/getting/started/GreetingService.java)
+
+
