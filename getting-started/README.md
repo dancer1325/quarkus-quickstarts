@@ -12,7 +12,10 @@
 ## Requirements
 
 - JDK 11+
-- GraalVM
+- ⚠️GraalVM ⚠️
+  - ways
+    - -- via -- SDKMAN
+      - `sdk install java 17.0.9-graal`
 
 ### Configuring GraalVM and JDK 11+
 
@@ -20,55 +23,48 @@
 
 ## how to build the application?
 
-> ./mvnw package
+* `./mvnw package`
+  * Problems:
+    * Problem1: " The following artifacts could not be resolved: com.thoughtworks.qdox:qdox:jar:2.0-M9, org.codehaus.plexus:plexus-compiler-api:jar:2.8.4, org.codehaus.plexus:plexus-compiler-manager:jar:2.8.4, org.codehaus.plexus:plexus-compiler-javac:jar:2.8.4: Could not transfer artifact com.thoughtworks.qdox:qdox:jar:2.0-M9 from/to artifactory"
+      * Solution: 
+        * ❌NOT use GraalVM JDK 25❌
+        * `source ~/.bashrc` & `java-local`
 
-### Live coding with Quarkus
+## how to run?
+### live coding
 
-> ./mvnw quarkus:dev
+* `./mvnw quarkus:dev`
+  * allows
+    * 👀code & running👀
+      * test1
+        * http://127.0.0.1:8080
+        * changes [index.html](src/main/resources/META-INF/resources/index.html)
+        * refresh the browser
+          * check the change reflected
+      * test2
+        * http://127.0.0.1:8080/hello
+        * [change endpoint's response](src/main/java/org/acme/getting/started/GreetingResource.java)
+        * refresh the browser
+          * check the change reflected
+  * provided -- by -- Maven Quarkus plugin
 
-* allows
-  * 👀code & running👀
-    * test1
-      * http://127.0.0.1:8080
-      * changes [index.html](src/main/resources/META-INF/resources/index.html)
-      * refresh the browser
-        * check the change reflected
-    * test2
-      * http://127.0.0.1:8080/hello
-      * [change endpoint's response](src/main/java/org/acme/getting/started/GreetingResource.java)
-      * refresh the browser
-        * check the change reflected
-* provided -- by -- Maven Quarkus plugin
+### | JVM mode
 
-### Run Quarkus in JVM mode
+* == -- as a -- conventional jar file
+* steps
+  * `./mvnw package`
+    * `ls -lh target/quarkus-app/quarkus-run.jar` 
+  * `java -jar ./target/quarkus-app/quarkus-run.jar`
 
-* TODO: 
-When you're done iterating in developer mode, you can run the application as a
-conventional jar file.
+### -- as a -- native executable
 
-First compile it:
-
-> ./mvnw package
-
-Then run it:
-
-> java -jar ./target/quarkus-app/quarkus-run.jar
-
-Have a look at how fast it boots, or measure the total native memory consumption.
-
-### Run Quarkus as a native executable
-
-You can also create a native executable from this application without making any
-source code changes. A native executable removes the dependency on the JVM:
-everything needed to run the application on the target platform is included in
-the executable, allowing the application to run with minimal resource overhead.
-
-Compiling a native executable takes a bit longer, as GraalVM performs additional
-steps to remove unnecessary codepaths. Use the  `native` profile to compile a
-native executable:
-
-> ./mvnw package -Dnative
-
-After getting a cup of coffee, you'll be able to run this executable directly:
-
-> ./target/getting-started-1.0.0-SNAPSHOT-runner
+* steps
+  * `./mvnw package -Dnative`
+    * Problems:
+      * Problem1: "[error]: Build step io.quarkus.deployment.pkg.steps.NativeImageBuildStep#build threw an exception: java.lang.RuntimeException: Failed to get GraalVM version"
+        * Solution: 👀install GraalVM  
+          * `sdk install java 17.0.9-graal`👀
+    * `ls -lh target/getting-started-1.0.0-SNAPSHOT-runner`
+      * 's size << [jar + JVM](#-jvm-mode)
+  * `./target/getting-started-1.0.0-SNAPSHOT-runner`
+  
