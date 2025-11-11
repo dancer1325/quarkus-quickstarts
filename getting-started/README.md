@@ -58,7 +58,6 @@
 * `lsof -i :5005`
   * debug port is active
 
-
 ### | JVM mode
 
 * == -- as a -- conventional jar file
@@ -97,3 +96,31 @@
 ### ArC
 #### inherit -- from -- `quarkus-rest`
 * [pom.xml](pom.xml)
+
+## how to run tests?
+* `./mvnw test`
+  * by default | port "8081"
+    * see logs
+* `./mvnw test -Dtest=GreetingResourceHttpClientTest`
+  * run INDIVIDUAL test class name
+
+## clients for testing
+### RestAssured
+* [GreetingResourceTest](src/test/java/org/acme/getting/started/GreetingResourceTest.java)
+### `@TestHTTPResource`
+* [GreetingResourceHttpClientTest](src/test/java/org/acme/getting/started/GreetingResourceHttpClientTest.java)
+
+## `quarkus.http.test-port`
+* [run tests](#how-to-run-tests)
+* check the logs / DIFFERENT port
+
+## `test.url`
+### system property / 
+#### created by Quarkus
+* [TestUrlSystemPropertyTest](src/test/java/org/acme/getting/started/TestUrlSystemPropertyTest.java)
+#### == base test URL | your test application is running
+* [TestUrlSystemPropertyTest](src/test/java/org/acme/getting/started/TestUrlSystemPropertyTest.java)
+### use cases
+#### you can NOT use injection
+* [TestUtils](src/test/java/org/acme/getting/started/TestUtils.java)
+* [StaticTestUrlTest](src/test/java/org/acme/getting/started/StaticTestUrlTest.java)
