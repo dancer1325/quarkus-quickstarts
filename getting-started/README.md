@@ -47,6 +47,17 @@
         * refresh the browser
           * check the change reflected
   * provided -- by -- Maven Quarkus plugin
+#### if there are any issues about compilation or deployment -> error page
+* see [GreetingResource.java](src/main/java/org/acme/getting/started/GreetingResource.java)
+#### listen for a debugger | port `5005`
+* | IntelliJ
+  * Run > New > Remote JVM Debug
+    * Host: localhost
+    * Port: 5005
+    * Debug
+* `lsof -i :5005`
+  * debug port is active
+
 
 ### | JVM mode
 

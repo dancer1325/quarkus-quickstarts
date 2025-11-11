@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Path("/hello")
 public class GreetingResource {
 
+    // live coding - if there are any issues about compilation or deployment -> error page - uncomment NEXT line
+    //.
     @Inject
     GreetingService service;
 
