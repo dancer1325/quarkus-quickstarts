@@ -124,3 +124,10 @@
 #### you can NOT use injection
 * [TestUtils](src/test/java/org/acme/getting/started/TestUtils.java)
 * [StaticTestUrlTest](src/test/java/org/acme/getting/started/StaticTestUrlTest.java)
+
+# Working -- with -- multi-module project OR external modules
+## Quarkus' build time
+### | Quarkus 2.0+, ❌NOT create separated Jandex index file❌
+* `./mvnw clean package -DskipTests`
+* `find . -name "*.idx" -type f`
+  * NO result
