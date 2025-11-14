@@ -1,9 +1,34 @@
 # Getting Started with Vert.x in Quarkus 
 
-* Quarkus guide: https://quarkus.io/guides/vertx
+* goal
+  * Quarkus application / exposes 4 HTTP endpoints
+    1. `/vertx/lorem`
+       * 's return
+         * small file's content
+    2. `/vertx/book`
+       * 's return
+         * large file (a book)'s content
+    3. `/vertx/hello`
+       * 's return  
+         * -- via -- Vert.x event bus
+    4. `/vertx/web`
+       * retrieve data -- , via Vert.x Web Client, from -- Wikipedia
 
-This project contains the code developed in the Quarkus guide, as well as a few extras examples.
-Run the examples using: `./mvnw quarkus:dev`
+    ![](architecture.png)
+
+* [Quarkus - Vertx guide](https://quarkus.io/guides/vertx)
+
+##  how has it been created?
+* `quarkus create app -P io.quarkus.platform:quarkus-bom:3.22.3 org.acme:kubernetes-quickstart --extension='rest-jackson,vertx'`
+* add the dependency `io.smallrye.reactive:smallrye-mutiny-vertx-web-client`
+  * | pom.xml
+
+    ```xml
+    <dependency>
+      <groupId>io.smallrye.reactive</groupId>
+      <artifactId>smallrye-mutiny-vertx-web-client</artifactId>
+    </dependency>
+    ```
 
 ## SockJS example
 
