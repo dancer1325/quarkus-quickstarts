@@ -6,23 +6,21 @@ import java.util.concurrent.CompletionStage;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
-import org.eclipse.microprofile.rest.client.annotation.RegisterClientHeaders;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
-import org.jboss.resteasy.annotations.jaxrs.QueryParam;
+import org.jboss.resteasy.reactive.RestQuery;
 
 import io.smallrye.mutiny.Uni;
 
 @Path("/extensions")
-@RegisterRestClient
-@RegisterClientHeaders(RequestUUIDHeaderFactory.class)
+@RegisterRestClient(configKey = "extensions-api")
 public interface ExtensionsService {
 
     @GET
-    Set<Extension> getById(@QueryParam String id);
+    Set<Extension> getById(@RestQuery String id);
 
     @GET
-    CompletionStage<Set<Extension>> getByIdAsync(@QueryParam String id);
+    CompletionStage<Set<Extension>> getByIdAsync(@RestQuery String id);
 
     @GET
-    Uni<Set<Extension>> getByIdAsUni(@QueryParam String id);
+    Uni<Set<Extension>> getByIdAsUni(@RestQuery String id);
 }

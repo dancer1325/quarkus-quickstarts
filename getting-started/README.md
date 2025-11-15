@@ -11,13 +11,13 @@
 
 ## Requirements
 
-- JDK 11+
+- JDK 17+
 - ⚠️GraalVM ⚠️
   - ways
     - -- via -- SDKMAN
       - `sdk install java 17.0.9-graal`
 
-### Configuring GraalVM and JDK 11+
+### Configuring GraalVM and JDK 17+
 
 * [how to build a Native Executable guide](https://quarkus.io/guides/building-native-image-guide)
 

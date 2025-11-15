@@ -1,27 +1,24 @@
 package org.acme.rest.client.resources;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
-import static org.junit.jupiter.api.Assertions.fail;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
 
+import jakarta.json.Json;
+import jakarta.json.JsonValue;
+import jakarta.json.stream.JsonParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
-import jakarta.json.Json;
-import jakarta.json.JsonValue;
-import jakarta.json.stream.JsonParser;
-
-import com.github.tomakehurst.wiremock.WireMockServer;
-
-import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.okJson;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class WireMockExtensions implements QuarkusTestResourceLifecycleManager {
 

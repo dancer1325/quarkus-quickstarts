@@ -7,14 +7,14 @@
     <artifactId>microprofile-graphql-client-quickstart</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <properties>
-        <compiler-plugin.version>3.8.1</compiler-plugin.version>
+        <compiler-plugin.version>3.11.0</compiler-plugin.version>
         <maven.compiler.parameters>true</maven.compiler.parameters>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-        <quarkus.platform.version>3.2.2.Final</quarkus.platform.version>
-        <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+        <quarkus.platform.version>3.29.3</quarkus.platform.version>
+        <surefire-plugin.version>3.1.2</surefire-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -36,11 +36,11 @@
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-reactive</artifactId>
+            <artifactId>quarkus-rest</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-reactive-jsonb</artifactId>
+            <artifactId>quarkus-rest-jsonb</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -121,7 +121,8 @@
             </build>
 
             <properties>
-                <quarkus.package.type>native</quarkus.package.type>
+                <quarkus.native.enabled>true</quarkus.native.enabled>
+                <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
             </properties>
         </profile>
     </profiles>

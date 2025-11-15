@@ -9,31 +9,12 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
 
 import io.quarkus.test.junit.QuarkusTest;
 
-@Testcontainers
 @QuarkusTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class JdbcSecurityRealmTest {
-
-    @Container
-    public static final PostgreSQLContainer DATABASE = new PostgreSQLContainer<>()
-            .withDatabaseName("elytron_security_jdbc")
-            .withUsername("quarkus")
-            .withPassword("quarkus")
-            .withExposedPorts(5432)
-            .withCreateContainerCmdModifier(cmd -> cmd
-                    .withHostName("localhost")
-                    .withPortBindings(new PortBinding(Ports.Binding.bindPort(5432), new ExposedPort(5432))))
-            .withInitScript("test_user.sql");
 
     @Test
     @Order(1)
@@ -57,7 +38,7 @@ public class JdbcSecurityRealmTest {
     @Order(3)
     void shouldAccessAdminWhenAdminAuthenticated() {
         given()
-                .auth().preemptive().basic("admin", "admin")
+                .auth().preemptive().basic("admin", "password")
                 .when()
                 .get("/api/admin")
                 .then()
@@ -69,7 +50,7 @@ public class JdbcSecurityRealmTest {
     @Order(4)
     void shouldNotAccessUserWhenAdminAuthenticated() {
         given()
-                .auth().preemptive().basic("admin", "admin")
+                .auth().preemptive().basic("admin", "password")
                 .when()
                 .get("/api/users/me")
                 .then()
@@ -80,7 +61,7 @@ public class JdbcSecurityRealmTest {
     @Order(5)
     void shouldAccessUserAndGetIdentityWhenUserAuthenticated() {
         given()
-                .auth().preemptive().basic("user", "user")
+                .auth().preemptive().basic("user", "password")
                 .when()
                 .get("/api/users/me")
                 .then()

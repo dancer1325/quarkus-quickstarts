@@ -32,7 +32,7 @@ metadata:
     app.quarkus.io/build-timestamp: 2022-03-31 - 10:36:56 +0000
   labels:
     app.kubernetes.io/name: color-service
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "2.0"
   name: color-service
 spec:
   ports:
@@ -40,10 +40,9 @@ spec:
       port: 80
       targetPort: 8080
   selector:
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "2.0"
     type: color-service
   type: ClusterIP
-# Stork discovers this Service
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -53,14 +52,12 @@ metadata:
     app.quarkus.io/build-timestamp: 2022-03-31 - 10:46:19 +0000
   labels:
     app.kubernetes.io/name: color-service
-    app.kubernetes.io/version: "1.0"
-    color: blue
+    app.kubernetes.io/version: "2.0"
     type: color-service
   name: color-service
 spec:
   rules:
     - host: color-service.127.0.0.1.nip.io
-# color-service is accessible outside the cluster at this host
       http:
         paths:
           - backend:
@@ -70,8 +67,6 @@ spec:
                   name: http
             path: /
             pathType: Prefix
-# It's not needed for Stork, although it helps to check the architecture is
-#  in place.
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -83,14 +78,14 @@ metadata:
     color: blue
     type: color-service
     app.kubernetes.io/name: blue-service
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "2.0"
   name: blue-service
 spec:
   replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: blue-service
-      app.kubernetes.io/version: "1.0"
+      app.kubernetes.io/version: "2.0"
   template:
     metadata:
       annotations:
@@ -100,7 +95,7 @@ spec:
         color: blue
         type: color-service
         app.kubernetes.io/name: blue-service
-        app.kubernetes.io/version: "1.0"
+        app.kubernetes.io/version: "2.0"
     spec:
       containers:
         - env:
@@ -108,8 +103,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: quay.io/quarkus/blue-service:1.0
-#         Image of the same service as the stork-quickstart guide
+          image: quay.io/quarkus/blue-service:2.0
           imagePullPolicy: Always
           name: blue-service
           ports:
@@ -126,14 +120,14 @@ metadata:
   labels:
     color: red
     type: color-service
-    app.kubernetes.io/version: "1.0"
+    app.kubernetes.io/version: "2.0"
     app.kubernetes.io/name: red-service
   name: red-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/version: "1.0"
+      app.kubernetes.io/version: "2.0"
       app.kubernetes.io/name: red-service
   template:
     metadata:
@@ -143,7 +137,7 @@ spec:
       labels:
         color: red
         type: color-service
-        app.kubernetes.io/version: "1.0"
+        app.kubernetes.io/version: "2.0"
         app.kubernetes.io/name: red-service
     spec:
       containers:
@@ -152,8 +146,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: quay.io/quarkus/red-service:1.0
-#         Image of the same service as the stork-quickstart guide
+          image: quay.io/quarkus/red-service:2.0
           imagePullPolicy: Always
           name: red-service
           ports:

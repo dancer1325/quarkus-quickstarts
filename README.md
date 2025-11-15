@@ -2,8 +2,8 @@
 
 ## Requirements
 
-* JDK 8 or 11+
-* GraalVM
+* JDK 8 or 17+
+* Manderl ORGraalVM
 * [how to set up your environment](https://quarkus.io/guides/building-native-image)
 
 ## Use alternative platforms
@@ -34,17 +34,22 @@
 * [Amazon S3](./amazon-s3-quickstart): How to connect to an Amazon S3 cloud storage
 * [Amazon SNS](./amazon-sns-quickstart): How to connect to an Amazon SNS (Simple Messaging Service)
 * [Amazon SQS](./amazon-sqs-quickstart): How to connect to an Amazon SQS (Simple Queue Service)
+* [Amazon SQS Connector](./amazon-sqs-connector-quickstart): How to connect to an Amazon SQS (Simple Queue Service) using the Reactive Messaging connector
 * [Amazon SSM](./amazon-ssm-quickstart): How to connect to Amazon SSM (Simple Systems Manager)
 * [AWT Graphics, ImageIO](./awt-graphics-rest-quickstart): How to create a service that watermarks images and draws text
 * [Hibernate Reactive Panache and RESTEasy Reactive](./hibernate-reactive-quickstart): Exposing a CRUD service over REST using Hibernate Reactive and Panache to connect to a PostgreSQL database
 * [Hibernate Reactive and RESTEasy](./hibernate-reactive-quickstart): Exposing a CRUD service over REST using Hibernate Reactive to connect to a PostgreSQL database
 * [Hibernate Reactive and Vert.x Web](./hibernate-reactive-routes-quickstart): Exposing a CRUD service with Reactive Routes using Hibernate Reactive to connect to a PostgreSQL database
+* [Hibernate Reactive with StatelessSession](./hibernate-reactive-stateless-quickstart): Exposing a CRUD service with Reactive Routes using Hibernate Reactive  using `StatelessSession` to connect to a PostgreSQL database
 * [Hibernate ORM and RESTEasy](./hibernate-orm-quickstart): Exposing a CRUD service over REST using Hibernate ORM to connect to a PostgreSQL database
 * [Hibernate ORM with Panache and RESTEasy](./hibernate-orm-panache-quickstart): Exposing a CRUD service over REST using Panache to connect to a PostgreSQL database
 * [Hibernate ORM with Panache and RESTEasy in Kotlin](./hibernate-orm-panache-kotlin-quickstart): Exposing a CRUD service over REST using Panache and kotlin to connect to a PostgreSQL database
 * [Hibernate ORM REST Data with Panache](./hibernate-orm-rest-data-panache-quickstart): Automatically generate the CRUD endpoints for your entities and repositories using Hibernate ORM with Panache.
-* [Hibernate ORM Multitenancy](./hibernate-orm-multi-tenancy-quickstart): Multitenant CRUD service over REST using Hibernate ORM to connect to a PostgreSQL database (schema or database approach)
+* [Hibernate ORM Multitenancy Database](./hibernate-orm-multi-tenancy-database-quickstart): Multitenant CRUD service over REST using Hibernate ORM to connect to multiple PostgreSQL databases (database approach)
+* [Hibernate ORM Multitenancy Schema](./hibernate-orm-multi-tenancy-schema-quickstart): Multitenant CRUD service over REST using Hibernate ORM to connect to a PostgreSQL database (schema approach)
+* [Hibernate Data Repositories (Jakarta Data) and RESTEasy](./hibernate-orm-quickstart): Exposing a CRUD service over REST using Hibernate Data Repositories (Jakarta Data) to connect to a PostgreSQL database
 * [Hibernate Search + Elasticsearch](./hibernate-search-orm-elasticsearch-quickstart): Index your Hibernate entities in Elasticsearch to get full text search
+* [Hibernate Search Standalone + Elasticsearch](./hibernate-search-orm-elasticsearch-quickstart): Index your Hibernate entities in Elasticsearch without Hibernate ORM to get full text search
 * [Infinispan Client](./infinispan-client-quickstart): How to use Infinispan Client. Covers creating caches and simple get/put
 * [Artemis JMS](./jms-quickstart): How to use the Artemis JMS extension
 * [Kafka](./kafka-quickstart): Use MicroProfile Reactive Messaging to interact with Apache Kafka
@@ -52,8 +57,6 @@
 * [Kafka and Hibernate Reactive with Panache](./kafka-panache-reactive-quickstart): Shows how to combine Kafka and Hibernate Reactive with Panache
 * [Kafka Streams](./kafka-streams-quickstart): Use the Apache Kafka Streams API to implement stream processing applications based on Apache Kafka
 * [Bare Kafka](./kafka-bare-quickstart): How to use the Apache Kafka and Kafka Vert.x clients in Quarkus
-* [Kogito](./kogito-quickstart): How to use Kogito for business process automation with Drools and jBPM
-* [Kogito](./kogito-dmn-quickstart): How to use Kogito for decision automation with Drools DMN Engine
 * [Liquibase](./liquibase-quickstart): How to use Liquibase to manage you schema migrations
 * [Liquibase MongoDB](./liquibase-mongodb-quickstart): How to use Liquibase MongoDB extension to manage you MongoDB migrations
 * [Micrometer](./micrometer-quickstart): How to use Micrometer to gather metrics
@@ -68,7 +71,6 @@
 * [Neo4j](./neo4j-quickstart): How to connect to a Neo4j graph datastore
 * [OpenAPI and Swagger UI](./openapi-swaggerui-quickstart): Use OpenAPI and Swagger UI to expose your REST API and test your REST services
 * [OpenTelemetry](./opentelemetry-quickstart): How to use OpenTelemetry to monitor application performance
-* [OpenTracing and Jaeger](./opentracing-quickstart): How to use MicroProfile OpenTracing and Jaeger to monitor application performances
 * [OptaPlanner](./optaplanner-quickstart): How to use OptaPlanner to optimize business resources
 * [Quartz](./quartz-quickstart): How to schedule periodic clustered jobs
 * [Qute](./qute-quickstart): How to use the Qute templating engine in Quarkus
@@ -87,7 +89,8 @@
 * [Security with OAuth2 opaque tokens](./security-oauth2-quickstart): How to use our security layer with OAuth2 opaque tokens
 * [Security with OpenId Connect](./security-openid-connect-quickstart): How to use OpenId Connect and [Keycloak](https://www.keycloak.org)
 * [Security with MicroProfile JWT](./security-jwt-quickstart): How to use MicroProfile JWT RBAC
-* [Security with WebAuthn](./security-webauthn-quickstart): Authenticate your users using WebAuthn
+* [Security with WebAuthn using Hibernate ORM](./security-webauthn-quickstart): Authenticate your users using WebAuthn and Hibernate ORM
+* [Security with WebAuthn using Hibernate Reactive](./security-webauthn-reactive-quickstart): Authenticate your users using WebAuthn and Hibernate Reactive
 * [Supporting Multi-Tenancy in OpenID Connect Applications](./security-openid-connect-multi-tenancy): How to use OpenId Connect and [Keycloak](https://www.keycloak.org)
 * [Spring DI compatibility layer](./spring-di-quickstart): How to use our Spring Dependency Injection compatibility layer
 * [Spring Data extension](./spring-data-jpa-quickstart): How to use the Quarkus extension for the Spring Data API
@@ -100,7 +103,6 @@
 * [Stork Consul](./stork-quickstart): How to discover and select services with Consul
 * [Stork Kubernetes](./stork-kubernetes-quickstart): How to discover and select services with Kubernetes
 * [Stork Dns](./stork-dns-quickstart): How to discover and select services with DNS
-* [Apache Tika](./tika-quickstart): Extract metadata and content from your documents
 * [Validation with Hibernate Validator](./validation-quickstart): How to use Hibernate Validator/Bean Validation in your REST services
 * [Using Vert.x](./vertx-quickstart): How to use the Vert.x extension
 * [Using Web Sockets](./websockets-quickstart): Demonstrate how to use web sockets and serve static assets

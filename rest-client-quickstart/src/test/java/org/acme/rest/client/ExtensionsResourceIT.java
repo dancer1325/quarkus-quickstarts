@@ -5,6 +5,5 @@ import io.quarkus.test.junit.QuarkusIntegrationTest;
 @QuarkusIntegrationTest
 public class ExtensionsResourceIT extends ExtensionsResourceTest {
 
-    // Run the same tests
-
+    // Execute the same tests but in native mode.
 }
