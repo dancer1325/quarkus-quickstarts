@@ -1,0 +1,6 @@
+### GET request to example server
+GET localhost:8080/hello?name=Alfred
+
+###
+GET localhost:8080/hello/names
+Content-Type: */*

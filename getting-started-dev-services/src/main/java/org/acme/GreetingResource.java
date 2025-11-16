@@ -16,7 +16,7 @@ public class GreetingResource {
     @GET
     @Transactional
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello(@RestQuery String name) {
+    public String hello(@RestQuery String name) {       //  @RestQuery BETTER than @QueryParam
          Greeting greeting = new Greeting();
          greeting.name = name;
          greeting.persist();

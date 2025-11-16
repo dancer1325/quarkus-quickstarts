@@ -9,6 +9,20 @@ Under the hood, this demo uses:
 - Panache and Hibernate for persistence 
 - Dev services 
 
+## how has it been created?
+* 
+   ```shell
+   mvn io.quarkus.platform:quarkus-maven-plugin:3.21.1:create \
+       -DprojectGroupId=org.acme \
+       -DprojectArtifactId=getting-started-dev-services \
+       -Dextensions='rest'
+   ```
+* modify [GreetingResource.java](src/main/java/org/acme/GreetingResource.java) /
+  * use `org.jboss.resteasy.reactive.RestQuery` annotation
+* `./mvnw quarkus:add-extension -Dextensions='hibernate-orm-panache,jdbc-postgresql'`
+  * add the persistence libraries
+* create [Greeting](src/main/java/org/acme/Greeting.java)
+
 ## Requirements
 
 To compile and run this demo you will need:
@@ -23,21 +37,11 @@ been set, and that a JDK 17+ `java` command is on the path.
 
 ### Live coding with Quarkus
 
-The Maven Quarkus plugin provides a development mode that supports
-live coding. To try this out:
+* `./mvnw quarkus:dev`
+  * Problems:
+    * Problem1: "[error]: Build step io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor#launchDatabases threw an exception: java.lang.RuntimeException: java.lang.IllegalStateException: Previous attempts to find a Docker environment failed. "
+      * Solution: TODO:
 
-> ./mvnw quarkus:dev
-
-This command will leave Quarkus running in the foreground listening on port 8080.
-
-1. Visit the default endpoint: [http://127.0.0.1:8080](http://127.0.0.1:8080).
-   - Make a simple change to [src/main/resources/META-INF/resources/index.html](src/main/resources/META-INF/resources/index.html) file.
-   - Refresh the browser to see the updated page.
-2. Visit the `/hello` endpoint: [http://127.0.0.1:8080/hello](http://127.0.0.1:8080/hello)
-   - Update the response in [src/main/java/org/acme/quickstart/GreetingResource.java](src/main/java/org/acme/quickstart/GreetingResource.java). Replace `hello` with `hello there` in the `hello()` method.
-   - Refresh the browser. You should now see `hello there`.
-   - Undo the change, so the method returns `hello` again.
-   - Refresh the browser. You should now see `hello`.
 
 ### Run Quarkus in JVM mode
 
