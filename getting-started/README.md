@@ -131,3 +131,19 @@
 * `./mvnw clean package -DskipTests`
 * `find . -name "*.idx" -type f`
   * NO result
+
+# Continuous Testing
+## automatically
+* `quarkus.test.continuous-testing=enabled` | [application.properties](src/main/resources/application.properties)
+* change something | GreetingResource.java
+* check | Quarkus' logs / tests are run
+## Selecting Tests to Run
+### -- via -- src/main/resources/application.properties
+#### ONLY valid | quarkus:dev
+* `./mvnq quarkus:dev`
+  * check ONLY run the tests / match `quarkus.test.include-pattern` OR `quarkus.test.exclude-pattern`
+#### NOT valid | != quarkus:dev
+* if you run `mvn test` -> run ALL specified tests
+### -- via -- build system
+* `mvn test -Dtest=StaticTestUrlTest`
+  * run ONLY StaticTestUrlTest's testS

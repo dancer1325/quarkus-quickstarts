@@ -41,8 +41,6 @@ been set, and that a JDK 17+ `java` command is on the path.
   * Problems:
     * Problem1: "[error]: Build step io.quarkus.datasource.deployment.devservices.DevServicesDatasourceProcessor#launchDatabases threw an exception: java.lang.RuntimeException: java.lang.IllegalStateException: Previous attempts to find a Docker environment failed. "
       * Solution: TODO:
-
-
 ### Run Quarkus in JVM mode
 
 When you're done iterating in developer mode, you can run the application as a
