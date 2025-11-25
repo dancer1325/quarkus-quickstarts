@@ -1,0 +1,5 @@
+### GET
+GET localhost:8080/coffee
+
+###
+GET localhost:8080/coffee/2/recommendations

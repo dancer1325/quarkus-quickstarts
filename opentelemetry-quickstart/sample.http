@@ -1,0 +1,12 @@
+### 1. Traced
+### 1.1 GET - hello
+GET localhost:8080/hello
+Content-Type: */*
+
+### 1.2 GET - chain
+GET localhost:8080/chain
+Content-Type: */*
+
+### 1.3 GET - setMetric
+GET localhost:8080/metrics/set?value=status
+Content-Type: */*
