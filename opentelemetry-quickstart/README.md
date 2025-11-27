@@ -13,7 +13,17 @@
 ### Tracing
 * [TracedResource.java](src/main/java/org/acme/opentelemetry/TracedResource.java)
   * ❌NO require changes | code❌
-### 
+### TODO:
+
+## how to run it locally?
+### -- via -- dev
+* `./mvnw quarkus:dev`
+  * Problems:
+    * Problem1: "Caused by: java.lang.IllegalStateException: Previous attempts to find a Docker environment failed. Will not retry. Please see logs and check configuration"
+      * Attempt1: `docker compose up -d`
+      * Solution: TODO:
+* TODO: 
+
 
 ## See telemetry
 
