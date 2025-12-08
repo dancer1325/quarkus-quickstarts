@@ -25,17 +25,16 @@
     implementation("io.quarkus:quarkus-container-image-jib")
     ```
 
-## Running the application in dev mode
+## generated Kubernetes resources
+### -- thanks to -- dekorate
+* [quarkus-kubernetes extension use it internally](https://github.com/search?q=repo%3Aquarkusio%2Fquarkus+dekorate+path%3A%2F%5Eextensions%5C%2Fkubernetes%5C%2F%2F&type=code)
+### support
+#### [vanilla](https://github.com/quarkusio/quarkus/tree/main/extensions/kubernetes/vanilla)
+#### [openshift](https://github.com/quarkusio/quarkus/tree/main/extensions/kubernetes/openshift)
+#### [minikube](https://github.com/quarkusio/quarkus/tree/main/extensions/kubernetes/minikube)
+#### [kind](https://github.com/quarkusio/quarkus/tree/main/extensions/kubernetes/kind)
 
-You can run your application in dev mode that enables live coding using:
-
-```shell script
-./mvnw quarkus:dev
-```
-
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
+## how to package + run the application?
 ### way1
 * `./mvnw package`
   * generates
@@ -49,33 +48,38 @@ You can run your application in dev mode that enables live coding using:
 * `./mvnw package -Dquarkus.package.jar.type=uber-jar`
 * `java -jar target/*-runner.jar`
 
-## Creating a native executable
+## | package
+### generate Kubernetes manifests
+* [package](#how-to-package--run-the-application)
+* check "target/kubernetes"
+### build a container image -- via -- Jib
+#### by default, disabled
+* [package](#how-to-package--run-the-application)
+* `docker images | grep kubernetes`
+  * NOTHING returned
+#### ways to build
+##### `./mvnw package -Dquarkus.container-image.build=true`
+* `docker images | grep kubernetes`
+  * check it's generated
+##### | "application.properties", quarkus.container-image.build=true
+* `./mvnw package`
+* `docker images | grep kubernetes`
+  * check it's generated
 
-You can create a native executable using:
+## ways to apply | cluster
+* [install kubectl](https://kubernetes.io/docs/tasks/tools/)
+* `kubectl apply -f target/kubernetes/kubernetes.json` OR `kubectl apply -f target/kubernetes/kubernetes.yml`
+  * Problems:
+    * Problem1: "kubectl logs pod/kubernetes-quickstart-6c8c6b56bf-r2fxw
+      Error from server (BadRequest): container "kubernetes-quickstart" in pod "kubernetes-quickstart-6c8c6b56bf-r2fxw" is waiting to start: trying and failing to pull image
+      "
+      * Solution: | "application.properties", `quarkus.kubernetes.image-pull-policy=Never`
+  * `kubectl get all`
+    * check pods & services are running
 
-```shell script
-./mvnw package -Dnative
-```
+## customize the generated image
+* check [application.properties](src/main/resources/application.properties)
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+## Generating idempotent resources
+* TODO:
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/kubernetes-quickstart-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Kubernetes ([guide](https://quarkus.io/guides/kubernetes)): Generate Kubernetes resources from annotations
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)

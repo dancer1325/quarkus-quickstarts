@@ -9,7 +9,7 @@ import org.eclipse.microprofile.health.Liveness;
 @Liveness
 // It will be returned under `...q/health/live`
 @ApplicationScoped
-// Recommendation to annotate with this or @Singleton
+// Recommendation to annotate with this or @Singleton   -- Reason:🧠1! bean instance / ALL health check requests🧠
 public class SimpleHealthCheck implements HealthCheck {
 
     @Override

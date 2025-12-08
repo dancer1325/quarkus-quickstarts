@@ -1,11 +1,11 @@
-###
+### aggregated check    ==  Readiness + Liveness + Started
 GET localhost:8080/q/health
 
-###
+### ALL liveness checkS
 GET localhost:8080/q/health/live
 
-###
+### ALL readiness checkS
 GET localhost:8080/q/health/ready
 
-###
+### ALL started checks
 GET localhost:8080/q/health/started
