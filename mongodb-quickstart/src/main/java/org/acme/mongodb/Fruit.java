@@ -8,6 +8,7 @@ public class Fruit {
     private String description;
     private String id;
 
+    // required -- by -- JSON serialization layer       -- comment it to check
     public Fruit() {
     }
 

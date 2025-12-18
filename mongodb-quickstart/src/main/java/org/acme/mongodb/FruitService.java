@@ -25,9 +25,14 @@ public class FruitService {
         try {
             while (cursor.hasNext()) {
                 Document document = cursor.next();
-                Fruit fruit = new Fruit();
+
+                // 1. -- via -- empty constructor
+                /*Fruit fruit = new Fruit();
                 fruit.setName(document.getString("name"));
-                fruit.setDescription(document.getString("description"));
+                fruit.setDescription(document.getString("description"));*/
+
+                // 2. -- via -- nonEmpty constructor
+                Fruit fruit = new Fruit(document.getString("name"), document.getString("description"));
                 list.add(fruit);
             }
         } finally {

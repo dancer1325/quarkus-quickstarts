@@ -1,0 +1,35 @@
+###
+GET localhost:8080/fruits
+Content-Type: */*
+
+###
+POST localhost:8080/fruits
+Content-Type: application/json
+
+{
+  "name": "fruit1",
+  "description": "description1",
+  "id": "id1"
+}
+
+### ONLY id
+POST localhost:8080/fruits
+Content-Type: application/json
+
+{
+  "id": "id1"
+}
+
+### ONLY description
+POST localhost:8080/fruits
+Content-Type: application/json
+
+{
+  "description": "description1"
+}
+
+### empty
+POST localhost:8080/fruits
+Content-Type: application/json
+
+{}

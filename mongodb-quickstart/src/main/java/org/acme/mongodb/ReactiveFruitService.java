@@ -20,9 +20,15 @@ public class ReactiveFruitService {
     public Uni<List<Fruit>> list() {
         return getCollection().find()
                 .map(doc -> {
+                    var name = doc.getString("name");
+                    var description = doc.getString("description");
+                    // 1. -- via -- empty constructor
                     Fruit fruit = new Fruit();
-                    fruit.setName(doc.getString("name"));
-                    fruit.setDescription(doc.getString("description"));
+                    fruit.setName(name);
+                    fruit.setDescription(description);
+
+                    // 2. -- via -- nonEmpty constructor
+                    /*Fruit fruit = new Fruit(name, description);*/
                     return fruit;
                 }).collect().asList();
     }

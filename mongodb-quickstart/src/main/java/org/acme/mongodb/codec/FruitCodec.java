@@ -57,12 +57,21 @@ public class FruitCodec implements CollectibleCodec<Fruit> {
     @Override
     public Fruit decode(BsonReader reader, DecoderContext decoderContext) {
         Document document = documentCodec.decode(reader, decoderContext);
-        Fruit fruit = new Fruit();
+
+        var name = document.getString("name");
+        var description = document.getString("description");
+
+        // 1. -- via -- empty constructor
+/*        Fruit fruit = new Fruit();
+        fruit.setName(name);
+        fruit.setDescription(description);*/
+
+        // 2. -- via -- nonEmpty constructor
+        Fruit fruit = new Fruit(name, description);
         if (document.getString("id") != null) {
             fruit.setId(document.getString("id"));
         }
-        fruit.setName(document.getString("name"));
-        fruit.setDescription(document.getString("description"));
+
         return fruit;
     }
 }
