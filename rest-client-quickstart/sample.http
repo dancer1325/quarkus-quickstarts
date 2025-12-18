@@ -1,0 +1,32 @@
+### 0. getAll
+### GET ALL extensionS
+GET localhost:8080/extension
+
+### 1. getById
+### GET extension by id       -- 1 --
+GET localhost:8080/extension/id/io.quarkus:quarkus-kubernetes
+
+### 2. getByIdAsync
+### GET extension by id, async       -- 1 --
+GET localhost:8080/extension/id-async/io.quarkus:quarkus-kubernetes
+Content-Type: */*
+
+### 3. getByIdAsUni
+### GET extension by id, async       -- 1 --
+GET localhost:8080/extension/id-uni/io.quarkus:quarkus-kubernetes
+Content-Type: */*
+
+## ---
+### 4. @ClientQueryParam
+### 4.1 | REST client interface
+GET localhost:8080/extension/with-param
+Content-Type: */*
+
+### 4.2 | interface's method
+### 4.2.1 value == constant
+GET localhost:8080/extension/with-other-param
+Content-Type: */*
+
+### 4.2.2 value == from method
+GET localhost:8080/extension/with-param-from-method
+Content-Type: */*

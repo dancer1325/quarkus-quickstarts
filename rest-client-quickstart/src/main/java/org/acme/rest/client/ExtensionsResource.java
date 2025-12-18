@@ -15,6 +15,14 @@ public class ExtensionsResource {
     @RestClient
     ExtensionsService extensionsService;
 
+    @RestClient
+    ExtensionsClientQueryParamService extensionsClientQueryParamService;
+
+    @GET
+    @Blocking
+    public Set<Extension> all() {
+        return extensionsService.getAll();
+    }
 
     @GET
     @Path("/id/{id}")
@@ -33,5 +41,23 @@ public class ExtensionsResource {
     @Path("/id-uni/{id}")
     public Uni<Set<Extension>> idUni(String id) {
         return extensionsService.getByIdAsUni(id);
+    }
+
+    @GET
+    @Path("/with-param")
+    public Set<Extension> withParam() {
+        return extensionsClientQueryParamService.getWithParam();
+    }
+
+    @GET
+    @Path("/with-other-param")
+    public Set<Extension> withOtherParam() {
+        return extensionsClientQueryParamService.getWithOtherParam();
+    }
+
+    @GET
+    @Path("/with-param-from-method")
+    public Set<Extension> withParamFromMethod() {
+        return extensionsClientQueryParamService.getFromMethod();
     }
 }
