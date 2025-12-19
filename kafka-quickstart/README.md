@@ -1,42 +1,26 @@
 Quarkus Kafka Quickstart
 ========================
 
-This project illustrates how Quarkus applications can interact with Apache Kafka using MicroProfile Reactive Messaging.
-
-## Start the application
-
-The application is composed of two applications communicating through Kafka.
-Interactions with Kafka is managed by MicroProfile Reactive Messaging.
-
-They can be started in dev mode using:
-
-```bash
-mvn -f producer quarkus:dev
-```
-
-and in another terminal:
-
-```bash
-mvn -f processor quarkus:dev
-```
-
-_NOTE_: Quarkus Dev Services starts a Kafka broker for you automatically.
-
-Then, open your browser at `http://localhost:8080/quotes.html`.
-You can send quote requests and observe received quotes.
+* goal
+  * Quarkus applications can interact -- , via MicroProfile Reactive Messaging, -- with Apache Kafka 
 
 ## Anatomy
 
-The application is composed of the following components:
+#### [Producer application](producer)
 
-#### Producer
+* receive requests -- , via HTTP, -- from the user
+* sends _quote requests_ -- to the -- Kafka broker
 
-The _producer_ application receive requests from the user (via HTTP) and sends _quote requests_ to the Kafka broker.
-Two main components compose the application:
-
-* `QuoteProducer` generates uniquely identified quote requests and sends them to the Kafka topic `quote-requests`.
-It also consumes the Kafka topic `quotes` and relays received messages to the browser using Server-Sent Events.
-* `quotes.html` sends quote requests to the previous endpoint and updates quotes with received prices.
+* Quote producer
+  * POST "/quotes/request"
+    * generates uniquely identified quote requests
+    * sends quote requests -- to the -- Kafka topic `quote-requests`
+  * GET "/quotes"
+    * consumes the Kafka topic `quotes`
+* ["quotes.html"](producer/src/main/resources/META-INF/resources/quotes.html)
+  * HTML / 
+    * enable button -- to -- sends quote requests
+    * display quotes
 
 #### Processor
 
@@ -47,7 +31,17 @@ The application has one main class:
 
 The connection to Kafka is configured in the `src/main/resources/application.properties` file.
 
-## Running the application in Docker
+## ways to run
+### | Dev mode
+
+* | this path,
+  * `mvn -f producer quarkus:dev`
+  * `mvn -f processor quarkus:dev`
+
+* Quarkus Dev Services
+  * starts AUTOMATICALLY a Kafka broker
+
+### | Docker
 
 To run the application in Docker, first make sure that both services are built:
 
@@ -63,7 +57,7 @@ docker-compose up
 
 This will create a single-node Kafka cluster and launch both applications.
 
-## Running in native
+### | native
 
 You can compile the application into a native binary using:
 
@@ -93,3 +87,9 @@ and in another terminal:
 ```bash
 ./processor/target/kafka-quickstart-processor-1.0.0-SNAPSHOT-runner
 ```
+
+
+## ways to check
+* http://localhost:8080/quotes.html
+  * hit "Request quote button"
+  * check consumed quotes

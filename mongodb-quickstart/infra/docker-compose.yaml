@@ -1,0 +1,10 @@
+services:
+  mongo:
+    image: mongo
+    # 1. WITHOUT specifying
+    # 2. WITH authentication    -- TODO: how to configure MongoDB client?
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
