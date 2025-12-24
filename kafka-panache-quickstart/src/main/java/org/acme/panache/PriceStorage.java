@@ -10,16 +10,29 @@ import jakarta.transaction.Transactional;
 public class PriceStorage {
 
     /**
-     * Classic Hibernate is blocking (unlike Hibernate Reactive), so we need the @Blocking annotation.
+     * goal
+     *      1. consumes Kafka topic "prices" messages
+     *      2. stores the price | database
+     * Classic Hibernate is blocking (!= Hibernate Reactive) -> we would need the @Blocking annotation
+     *      BUT ALREADY included -- via -- @Transactional
      * @param priceInUsd  the price
      */
     @Incoming("prices")
-    @Blocking
+    // @Blocking            // comment it & it works
     @Transactional
     public void store(int priceInUsd) {
+        System.out.println("Thread: " + Thread.currentThread().getName() + 
+                          " - Storing price: " + priceInUsd);
         Price price = new Price();
         price.value = priceInUsd;
-        price.persist();
+        price.persist();        // .persist         Hibernate + Panache
+    }
+
+    // NON @Blocking
+    @Incoming("pricesNonBlocking")
+    public void logThread(int priceInUsd) {
+        System.out.println("Thread - WITHOUT @Blocking: " + Thread.currentThread().getName() +
+                          " - Price: " + priceInUsd);
     }
 
 }

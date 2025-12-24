@@ -11,12 +11,18 @@ import io.smallrye.common.annotation.Blocking;
 public class PriceResource {
 
     /**
-     * We uses classic Hibernate, so the API is blocking, so we need to use @Blocking.
      * @return the list of prices
      */
     @GET
     @Blocking
     public List<Price> getAllPrices() {
-        return Price.listAll();
+        return Price.listAll();     // .listAll()       classic Hibernate -> blocking   -> we need to use @Blocking
     }
+
+    // TODO: check if it works
+    /*@GET
+    @Path("/nonblocking")
+    public List<Price> getNonBlockingAllPrices() {
+        return Price.listAll();
+    }*/
 }

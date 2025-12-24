@@ -1,44 +1,68 @@
 Quarkus Kafka/Panache Quickstart
 ================================
 
-This project illustrates how you can interact with Apache Kafka using MicroProfile Reactive Messaging and Hibernate with Panache.
-The project uses:
+* goal
+  * interact with 
+    * -- , via MicroProfile Reactive Messaging, -- Apache Kafka
+    * -- , via Panache, -- Hibernate 
 
-* RESTEasy Reactive
-* Reactive Messaging and its connector for Kafka
-* (Classic) Hibernate with Panache
+* components 
+  * used
+    * RESTEasy Reactive
+    * Reactive Messaging + Kafka connector 
+    * (Classic) Hibernate with Panache
 
-_NOTE:_ The [kafka-panache-reactive-quickstart](../kafka-panache-reactive-quickstart) provides the same example but using Hibernate Reactive.
+* vs [kafka-panache-reactive-quickstart](../kafka-panache-reactive-quickstart)
+  * Hibernate vs Hibernate Reactive
 
-## Start the application
+## + blocking processing (`@Blocking`)
+### use cases: database interactions
+* this whole project
+  * [PriceResource.java](src/main/java/org/acme/panache/PriceResource.java)
+  * [PriceStorage.java](src/main/java/org/acme/panache/PriceStorage.java)
+### == processing should NOT run | caller thread
+* [run](#how-to-run--dev-mode) 
+* check logs
+  * "PRODUCER..." -- PriceGenerator -- 
+    * == caller thread use executor-thread
+  * "Thread " -- blocking processing == consumer --
+    * use worker-thread
+      * != executor-thread
 
-The application can be started using: 
+## Kafka connector
+### by default, use worker threads
+* [run it](#how-to-run--dev-mode)
+* check logs "Thread:" & "Thread - WITHOUT @Blocking: " get "vert.x-worker-thread"
 
-```bash
-mvn quarkus:dev
-```
+## EXISTING `@Blocking` annotations
+### `io.smallrye.reactive.messaging.annotations.Blocking`
+* [PriceStorage](src/main/java/org/acme/panache/PriceStorage.java)
+### `io.smallrye.common.annotation.Blocking`
+* [PriceResource](src/main/java/org/acme/panache/PriceResource.java)
 
-_NOTE:_ The database and Kafka broker are started using Dev Services
+## `@Transactional`
+### uses | method
+* [PriceStorage](src/main/java/org/acme/panache/PriceStorage.java)
+### ALTHOUGH you do NOT use `@Blocking` -> AUTOMATICALLY _block_
+* [PriceStorage](src/main/java/org/acme/panache/PriceStorage.java)
+  * commented `@Blocking`
+  * [run it](#how-to-run--dev-mode)
+  * it STILL works
 
-Then, open your browser to `http://localhost:8080/prices`, and you should get the set of prices written in the database.
-Every 5 seconds, a new price is generated, sent to a Kafka topic, received by a Kafka consumer and written to the database.
-Refresh the page to see more prices.
+## how to run | dev mode?
+* `mvn quarkus:dev`
+  * Problems:
+    * Problem1: "Previous attempts to find a Docker environment failed. Will not retry. Please see logs and check configuration"
+      * Attempt1: `docker compose up -d`
+      * Solution: disable DEV services | [application.properties](src/main/resources/application.properties)
+    * Problem2: "Bean is not active: SYNTHETIC bean [class=io.agroal.api.AgroalDataSource"
+      * Solution: configure database & kafka | [application.properties](src/main/resources/application.properties)
 
-## Anatomy
+## how to run | native?
 
-* `PriceGenerator` - a bean generating random price. They are sent to a Kafka topic.
-* `PriceStorage` - on the consuming side, the `PriceStorage` receives the Kafka message and write it into the database using Hibernate with Panache
-* `PriceResource`  - the `PriceResource` retrieves the prices from the database and send them into the HTTP response
-
-## Running in native
-
-You can compile the application into a native binary using:
-
-`mvn clean install -Pnative`
-
-As you are not in dev or test mode, you need to start a PostgreSQL instance and a Kafka broker.
-To start them, just run `docker-compose up -d`.
-
-Then, run the application with:
-
-`./target/kafka-panache-quickstart-1.0.0-SNAPSHOT-runner` 
+* `docker-compose up -d`
+* `mvn clean install -Pnative`
+  * Problems:
+    * Problem1: "Previous attempts to find a Docker environment failed. Will not retry. Please see logs and check configuration"
+      * Solution: TODO:
+* `./target/kafka-panache-quickstart-1.0.0-SNAPSHOT-runner`

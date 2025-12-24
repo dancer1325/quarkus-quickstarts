@@ -1,0 +1,7 @@
+###
+GET localhost:8080/prices
+Content-Type: */*
+
+###
+GET localhost:8080/prices/nonblocking
+Content-Type: */*

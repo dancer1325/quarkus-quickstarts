@@ -8,18 +8,35 @@ import java.time.Duration;
 import java.util.Random;
 
 /**
- * A bean producing random prices every 5 seconds.
- * The prices are written to a Kafka topic (prices). The Kafka configuration is specified in the application configuration.
+ * bean / EACH 5 seconds
+ *      1. produce random prices
+ *      2. publish | "prices" Kafka topic
  */
 @ApplicationScoped
 public class PriceGenerator {
 
     private Random random = new Random();
 
+    // publish | "prices" Kafka topic
     @Outgoing("generated-price")
     public Multi<Integer> generate() {
         return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
-                .map(tick -> random.nextInt(100));
+                .map(tick -> {
+                    String callerThread = Thread.currentThread().getName();
+                    System.out.println("PRODUCER (caller) thread: " + callerThread);
+                    return random.nextInt(100);
+                });
+    }
+
+    // publish | "prices" Kafka topic
+    @Outgoing("generated-price-nonblocking")
+    public Multi<Integer> generateNonBlocking() {
+        return Multi.createFrom().ticks().every(Duration.ofSeconds(5))
+                .map(tick -> {
+                    String callerThread = Thread.currentThread().getName();
+                    System.out.println("PRODUCER NonBlocking (caller) thread: " + callerThread);
+                    return random.nextInt(100);
+                });
     }
 
 }
